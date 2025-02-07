@@ -93,11 +93,7 @@ public class LightBehaviour : MonoBehaviour
         if (angleToPlayer > outerAngle * 0.5f) return false;
 
         RaycastHit2D hit = Physics2D.Raycast(lightPosition, toPlayer, distance, obstacleMask);
-        if (hit.collider != null)
-        {
-            Debug.Log("Obstacle entre lumiere et joueur");
-            return false;
-        }
+        if (hit.collider != null) return false;
 
         // Si entre inner et outer, faire une interpolation
         if (angleToPlayer <= innerAngle * 0.5f) return true;
