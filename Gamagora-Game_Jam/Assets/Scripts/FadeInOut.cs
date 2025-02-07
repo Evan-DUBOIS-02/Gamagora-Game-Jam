@@ -11,6 +11,7 @@ public class FadeInOut : MonoBehaviour
     private void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
+        _canvasGroup.alpha = 1.0f;
         FadeOut();
     }
 
