@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: c66a6c2a54738254e89d0674015f983d
+guid: 80567422ae36dc04fac47f7b35911ea1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5134282558523814728
-    second: plafond5_0
+      213: -1754820134883211789
+    second: terre2_0
   - first:
-      213: -7531913401413085275
-    second: plafond5_1
+      213: 5168373079580416346
+    second: terre2_1
+  - first:
+      213: -1551437390757099851
+    second: terre2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1010
+  spritePixelsToUnits: 1005
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +78,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -129,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: plafond5_0
+      name: terre2_0
       rect:
         serializedVersion: 2
-        x: 509
-        y: 937
-        width: 1029
-        height: 598
+        x: 1408
+        y: 1695
+        width: 11
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 843bb4dc8c2a04740800000000000000
-      internalID: 5134282558523814728
+      spriteID: 3f5459f7260a5a7e0800000000000000
+      internalID: -1754820134883211789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plafond5_1
+      name: terre2_1
       rect:
         serializedVersion: 2
-        x: 1216
-        y: 772
-        width: 13
-        height: 9
+        x: 535
+        y: 512
+        width: 973
+        height: 1025
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +169,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5a7d4cdcaa4497790800000000000000
-      internalID: -7531913401413085275
+      spriteID: a591513ceefb9b740800000000000000
+      internalID: 5168373079580416346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: terre2_2
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 1130
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b60aa8b9ef287ae0800000000000000
+      internalID: -1551437390757099851
       vertices: []
       indices: 
       edges: []
@@ -186,8 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      plafond5_0: 5134282558523814728
-      plafond5_1: -7531913401413085275
+      terre2_0: -1754820134883211789
+      terre2_1: 5168373079580416346
+      terre2_2: -1551437390757099851
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
