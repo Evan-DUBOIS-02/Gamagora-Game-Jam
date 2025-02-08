@@ -19,11 +19,12 @@ public class FadeInOut : MonoBehaviour
     {
         if(fadeIn)
         {
-            if(_canvasGroup.alpha < 1)
+            if(_canvasGroup.alpha < 1f)
             {
-                _canvasGroup.alpha += timeToFade * Time.deltaTime;
-                if(_canvasGroup.alpha >= 1 )
+                _canvasGroup.alpha += (1f / timeToFade) * Time.deltaTime;
+                if (_canvasGroup.alpha >= 1 )
                 {
+                    _canvasGroup.alpha = 1f;
                     fadeIn = false;
                 }
             }
@@ -33,9 +34,10 @@ public class FadeInOut : MonoBehaviour
         {
             if (_canvasGroup.alpha >= 0)
             {
-                _canvasGroup.alpha -= timeToFade * Time.deltaTime;
-                if (_canvasGroup.alpha == 0)
+                _canvasGroup.alpha -= (1f / timeToFade) * Time.deltaTime;
+                if (_canvasGroup.alpha <= 0)
                 {
+                    _canvasGroup.alpha = 0f;
                     fadeOut = false;
                 }
             }
