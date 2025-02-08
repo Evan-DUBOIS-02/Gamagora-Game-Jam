@@ -35,10 +35,10 @@ public class DynamicPlatform : MonoBehaviour
         {
             GameObject segment = new GameObject("PlatformSegment_" + i);
             segment.transform.parent = transform;
-            segment.transform.localPosition = new Vector3(-platformWidth / 2 + segmentWidth * (i + 0.5f), 0.3f, 0);
+            segment.transform.localPosition = new Vector3(-platformWidth / 2 + segmentWidth * (i + 0.5f), 0, 0);
 
             BoxCollider2D col = segment.AddComponent<BoxCollider2D>();
-            col.size = new Vector2(segmentWidth, 0.2f);
+            col.size = new Vector2(segmentWidth, transform.localScale.y);
             colliders[i] = col;
         }
     }
@@ -50,6 +50,7 @@ public class DynamicPlatform : MonoBehaviour
             bool isActive = false;
             for (int j = 0; j < lightSource.Length; j++)
             {
+                if (lightSource[j].intensity <= 0) break;
                 Vector3 checkPosition = colliders[i].transform.position;
                 if (IsColliderInLight(lightSource[j], checkPosition))
                 {
