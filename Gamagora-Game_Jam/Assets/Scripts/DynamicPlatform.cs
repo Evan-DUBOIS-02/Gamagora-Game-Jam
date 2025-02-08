@@ -10,14 +10,10 @@ public class DynamicPlatform : MonoBehaviour
     private BoxCollider2D[] colliders;
     private float platformWidth;
 
-    public Transform minPos;
-    public Transform maxPos;
-    public int currentDir = 1;
-    public float speed;
+    
 
     void Start()
     {
-        transform.position = minPos.position;
         platformWidth = transform.localScale.x;
         GenerateColliders();
     }
@@ -25,27 +21,9 @@ public class DynamicPlatform : MonoBehaviour
     void Update()
     {
         UpdateColliders();
-        Move();
     }
 
-    private void Move()
-    {
-        Vector3 dir = (maxPos.position - minPos.position).normalized;
-        transform.position += dir * speed * Time.deltaTime * currentDir;
-        
-        if (currentDir == 1)
-        {
-            float currentDistFromMin = Vector3.Distance(transform.position, minPos.position);
-            if (currentDistFromMin >= Vector3.Distance(minPos.position, maxPos.position))
-                currentDir = -1;
-        }
-        else
-        {
-            float currentDistFromMax = Vector3.Distance(transform.position, maxPos.position);
-            if (currentDistFromMax >= Vector3.Distance(minPos.position, maxPos.position))
-                currentDir = 1;
-        }
-    }
+    
 
     void GenerateColliders()
     {
@@ -57,7 +35,7 @@ public class DynamicPlatform : MonoBehaviour
         {
             GameObject segment = new GameObject("PlatformSegment_" + i);
             segment.transform.parent = transform;
-            segment.transform.localPosition = new Vector3(-platformWidth / 2 + segmentWidth * (i + 0.5f), 0.4f, 0);
+            segment.transform.localPosition = new Vector3(-platformWidth / 2 + segmentWidth * (i + 0.5f), 0.3f, 0);
 
             BoxCollider2D col = segment.AddComponent<BoxCollider2D>();
             col.size = new Vector2(segmentWidth, 0.2f);
