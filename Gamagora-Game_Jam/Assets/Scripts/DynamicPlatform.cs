@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-
 public class DynamicPlatform : MonoBehaviour
 {
     public Light2D[] lightSource; // La lumière à vérifier
