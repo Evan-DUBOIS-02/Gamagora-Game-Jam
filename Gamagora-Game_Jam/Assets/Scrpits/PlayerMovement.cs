@@ -129,12 +129,12 @@ public class PlayerMovement : MonoBehaviour
         if(turnRight)
         {
             _isFacingRight = true;
-            transform.Rotate(0f, 100f, 0f);
+            transform.Rotate(0f, 180f, 0f);
         }
         else
         {
             _isFacingRight = false;
-            transform.Rotate(0f, -100f, 0f);
+            transform.Rotate(0f, -180f, 0f);
         }
     }
 

@@ -19,8 +19,6 @@ public class InputManager : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
 
-        Debug.Log(playerInput);
-
         _moveAction = playerInput.actions["Move"];
         _jumpAction = playerInput.actions["Jump"];
         _runAction = playerInput.actions["Sprint"];

@@ -5,13 +5,13 @@ using UnityEngine.Rendering.Universal;
 public class LightBehaviour : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private Transform player;
+    private Transform player;
     [SerializeField] private LayerMask obstacleMask;
 
     // Life time
     [Header("Die")]
     [SerializeField] private bool _die;
-    [SerializeField] private float _lifeTime;
+    [SerializeField] public float _lifeTime;
     [SerializeField] private float _lifeTimePercentReducing;
     private float _currentLifeTime = 0f;
     private float _initialOuterRange;
@@ -28,6 +28,7 @@ public class LightBehaviour : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
         _light = GetComponent<Light2D>();
         _initialOuterRange = _light.pointLightOuterRadius;
         _initialInnerRangeDiff = _light.pointLightOuterRadius - _light.pointLightInnerRadius;
