@@ -8,7 +8,6 @@ public class ExitDoor : MonoBehaviour
     [SerializeField] private FadeInOut _fade; // Fade pour la transition
     [SerializeField] private Camera _camera; // Camera principale
     [SerializeField] private float targetOrthographicSize = 5f; // Taille finale de la caméra (pour une caméra 2D)
-    [SerializeField] private float zoomSpeed = 0.1f; // Vitesse du zoom
     [SerializeField] private string nextSceneName = "Level2"; // Nom de la prochaine scène
 
     private void OnTriggerEnter2D(Collider2D collision)
