@@ -152,6 +152,7 @@ public class PlayerMovement : MonoBehaviour
         //WHEN WE PRESS JUMP BUTTON
         if(InputManager.jumpWasPressed)
         {
+            dustJump.Play();
             _jumpBufferTimer = moveStats.jumpBufferTime;
             _jumpReleaseDuringBuffer = false;
         }
