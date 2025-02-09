@@ -44,7 +44,8 @@ public class PlayerMovement : MonoBehaviour
     private float _coyoteTimer;
 
     [Header("VFX")]
-    public ParticleSystem dust;
+    public ParticleSystem dustRun;
+    public ParticleSystem dustJump;
 
     private void Awake()
     {
@@ -151,6 +152,7 @@ public class PlayerMovement : MonoBehaviour
         //WHEN WE PRESS JUMP BUTTON
         if(InputManager.jumpWasPressed)
         {
+            dustJump.Play();
             _jumpBufferTimer = moveStats.jumpBufferTime;
             _jumpReleaseDuringBuffer = false;
         }
@@ -209,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
         //LANDED
         if((_isJumping || _isFalling) && _isGrounded && verticalVelocity <= 0f)
         {
+            dustJump.Play();
             _isJumping = false;
             _isFalling = false;
             _isFastFalling = false;
@@ -503,6 +506,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void CreateDust()
     {
-        dust.Play();
+        dustRun.Play();
     }
 }
