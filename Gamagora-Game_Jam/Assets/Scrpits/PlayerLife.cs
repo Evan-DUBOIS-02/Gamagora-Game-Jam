@@ -13,12 +13,14 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] Image deathEffect;
     [SerializeField] private Transform start;
     [SerializeField] private float delayBeforeZoom;
+    [SerializeField] private ParticleSystem deathVFX;
 
     private float normalSize;
     private Coroutine zoomCoroutine;
     private bool isDead = false;
     private bool isZooming = false;
     public bool isWin = false;
+    private bool deathVFXplayed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,6 +57,12 @@ public class PlayerLife : MonoBehaviour
             var colorTmp = deathEffect.color;
             colorTmp.a = Mathf.Lerp(colorTmp.a, 1, Time.deltaTime * zoomSpeed);
             deathEffect.color = colorTmp;
+
+            if (!deathVFXplayed && cam.orthographicSize <= zoomSize + 0.12f)
+            {
+                deathVFXplayed = true;
+                deathVFX.Play();
+            }
 
             if (cam.orthographicSize <= zoomSize + 0.1f) isDead = true;
         }
