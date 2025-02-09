@@ -9,16 +9,27 @@ public class PlayerAimAndShoot : MonoBehaviour
     [SerializeField] private Transform flareSpawnPoint;
     [SerializeField] private GameObject rotationMouseGO; //GUN
     [SerializeField] private DynamicPlatform[] plateforms;
+    [SerializeField] private float timeBetweenFlare = 5f;
     private GameObject flareInst;
     private Vector2 worldPosition;
     private Vector2 directionVector;
+
     private float angle;
 
     // Update is called once per frame
     void Update()
     {
         HandleRotation();
-        HandleFlareShooting();
+
+        if(timeBetweenFlare <= 0)
+        {
+            HandleFlareShooting();
+            timeBetweenFlare = 5f;
+        }
+        else
+        {
+            timeBetweenFlare -= Time.deltaTime;
+        }
     }
 
     private void HandleRotation()
