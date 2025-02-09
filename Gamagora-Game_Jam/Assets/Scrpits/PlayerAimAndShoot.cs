@@ -15,6 +15,12 @@ public class PlayerAimAndShoot : MonoBehaviour
     private Vector2 directionVector;
 
     private float angle;
+    private float timeBetweenFlareBase;
+
+    private void Start()
+    {
+        timeBetweenFlareBase = timeBetweenFlare;
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,7 +30,6 @@ public class PlayerAimAndShoot : MonoBehaviour
         if(timeBetweenFlare <= 0)
         {
             HandleFlareShooting();
-            timeBetweenFlare = 5f;
         }
         else
         {
@@ -67,6 +72,7 @@ public class PlayerAimAndShoot : MonoBehaviour
             Debug.Log(GetComponent<PlayerLife>().lights == null);
             Debug.Log(light.gameObject.GetComponent<LightBehaviour>() == null);
             GetComponent<PlayerLife>().lights.Add(light.gameObject.GetComponent<LightBehaviour>());
+            timeBetweenFlare = timeBetweenFlareBase;
         }
     }
 }

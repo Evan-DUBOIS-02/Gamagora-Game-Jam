@@ -265,11 +265,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14628d0b7eb08b14e8c6afc66543b039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
   _die: 1
-  _lifeTime: 4
+  _lifeTime: 10
   _lifeTimePercentReducing: 0.25
   _rythme: []
+  isPlayerInLight: 0
