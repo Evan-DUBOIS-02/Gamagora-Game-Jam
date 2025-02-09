@@ -80,6 +80,8 @@ public class PlayerLife : MonoBehaviour
         if (isDead)
         {
             transform.position = start.position;
+            isDead = false;
+            StopZoom();
         }
     }
 
