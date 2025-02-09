@@ -77,7 +77,7 @@ public class PlayerLife : MonoBehaviour
 
     public void StartZoomWithDelay()
     {
-        if (zoomCoroutine == null) // Évite de lancer plusieurs fois la coroutine
+        if (zoomCoroutine == null) // ï¿½vite de lancer plusieurs fois la coroutine
         {
             zoomCoroutine = StartCoroutine(ZoomAfterDelay());
         }
