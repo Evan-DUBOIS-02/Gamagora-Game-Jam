@@ -1,12 +1,14 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerAimAndShoot : MonoBehaviour
 {
     public GameObject flare;
     [SerializeField] private Transform flareSpawnPoint;
     [SerializeField] private GameObject rotationMouseGO; //GUN
+    [SerializeField] private DynamicPlatform[] plateforms;
     private GameObject flareInst;
     private Vector2 worldPosition;
     private Vector2 directionVector;
@@ -45,6 +47,12 @@ public class PlayerAimAndShoot : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             flareInst = Instantiate(flare, flareSpawnPoint.position, rotationMouseGO.transform.rotation);
+            Light2D light = flareInst.GetComponentInChildren<Light2D>();
+            Debug.Log(light);
+            for (int i = 0; i < plateforms.Length; i++)
+            {
+                plateforms[i].lightSource.Add(light);
+            }
         }
     }
 }

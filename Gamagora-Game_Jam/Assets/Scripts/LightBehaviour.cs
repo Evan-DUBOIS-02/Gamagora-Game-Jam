@@ -26,6 +26,8 @@ public class LightBehaviour : MonoBehaviour
     // Light
     private Light2D _light;
 
+    public bool isPlayerInLight = false;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -67,9 +69,13 @@ public class LightBehaviour : MonoBehaviour
             }
         }
 
-        if(IsPlayerInLight())
+        if(IsPlayerInLight() && _light.intensity > 0)
         {
-            Debug.Log("Le joueur est dans la lumière");
+            isPlayerInLight = true;
+        }
+        else
+        {
+            isPlayerInLight = false;
         }
     }
 

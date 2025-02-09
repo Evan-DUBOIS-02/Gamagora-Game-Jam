@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6068339436433214723}
   - component: {fileID: 6388638897415154709}
   - component: {fileID: 7125623432673404168}
+  - component: {fileID: 536347614524138843}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -30,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5106537161114679112}
   - {fileID: 2068748782961302893}
@@ -149,6 +150,33 @@ MonoBehaviour:
   flare: {fileID: 22754249956454071, guid: 2399637a27774fc4d9bb3080724b5395, type: 3}
   flareSpawnPoint: {fileID: 3692348955694837168}
   rotationMouseGO: {fileID: 7246117308019485148}
+  plateforms:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &536347614524138843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516554838867030493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b5bc4d213ef2c43a5bdab0d5998222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3347457777807774278
 GameObject:
   m_ObjectHideFlags: 0
