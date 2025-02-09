@@ -1,16 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Scripting.APIUpdating;
 public class DynamicPlatform : MonoBehaviour
 {
-    public Light2D[] lightSource; // La lumière à vérifier
+    public List<Light2D> lightSource = new List<Light2D>(); // La lumière à vérifier
     public LayerMask obstacleMask; // Masque pour les obstacles
     public int segments = 10; // Nombre de divisions de la plateforme
 
     private BoxCollider2D[] colliders;
     private float platformWidth;
-
-    
 
     void Start()
     {
@@ -34,6 +33,7 @@ public class DynamicPlatform : MonoBehaviour
         for (int i = 0; i < segments; i++)
         {
             GameObject segment = new GameObject("PlatformSegment_" + i);
+            segment.layer = LayerMask.NameToLayer("InvisibleObstacle");
             segment.transform.parent = transform;
             segment.transform.localPosition = new Vector3(-platformWidth / 2 + segmentWidth * (i + 0.5f), 0, 0);
 
@@ -45,21 +45,40 @@ public class DynamicPlatform : MonoBehaviour
 
     void UpdateColliders()
     {
+        bool isAtLeastOne = false;
         for(int i = 0; i < segments; i++)
         {
-            bool isActive = false;
-            for (int j = 0; j < lightSource.Length; j++)
+            bool actif = false;
+            for (int j = 0; j < lightSource.Count; j++)
             {
-                if (lightSource[j].intensity <= 0) break;
-                Vector3 checkPosition = colliders[i].transform.position;
-                if (IsColliderInLight(lightSource[j], checkPosition))
+                if(lightSource[j] != null)
                 {
-                    isActive = true;
-                    break;
+                    if (lightSource[j].intensity <= 0) continue;
+                    Vector3 checkPosition = colliders[i].transform.position;
+                    if (IsColliderInLight(lightSource[j], checkPosition))
+                    {
+                        actif = true;
+                        isAtLeastOne = true;
+                        break;
+                    }
                 }
             }
-            colliders[i].enabled = isActive;
+            colliders[i].enabled = actif;
         }
+        if(isAtLeastOne)
+        {
+            Color tmp = GetComponent<SpriteRenderer>().color;
+            tmp.a = 1f;
+            GetComponent<SpriteRenderer>().color = tmp;
+        }
+        else
+        {
+            Color tmp = GetComponent<SpriteRenderer>().color;
+            tmp.a = 0.5f;
+            GetComponent<SpriteRenderer>().color = tmp;
+        }
+
+        lightSource.RemoveAll(x => x == null);
     }
 
     private bool IsColliderInLight(Light2D light, Vector3 colPosition)

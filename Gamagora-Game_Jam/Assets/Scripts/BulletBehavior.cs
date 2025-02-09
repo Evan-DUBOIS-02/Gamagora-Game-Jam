@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class BulletBehavior : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] public float physicsFlareGravity = 3f;
     private float destroyTime;
     private Rigidbody2D rb;
+    private bool isMoving = true;
 
     private void Start()
     {
@@ -21,7 +23,10 @@ public class BulletBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.right = rb.linearVelocity;
+        if (isMoving)
+            transform.right = rb.linearVelocity;
+        else
+            rb.simulated = false;
     }
 
     private void SetPhysicsVelocity()
@@ -32,5 +37,14 @@ public class BulletBehavior : MonoBehaviour
     private void SetDestroyTime()
     {
         Destroy(gameObject, destroyTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("InvisibleObstacle") || collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            transform.SetParent(collision.gameObject.transform);
+            isMoving = false;
+        }
     }
 }
