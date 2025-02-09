@@ -1,63 +1,101 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerLife : MonoBehaviour
 {
-    [SerializeField] private float timeBeforeDeath = 3f;
     [SerializeField] private Camera cam;
-    [SerializeField] private LightBehaviour[] lights;
-    [SerializeField] private float targetOrthographicSize;
+    [SerializeField] public List<LightBehaviour> lights = new List<LightBehaviour>();
+    [SerializeField] private float zoomSize;
+    [SerializeField] private float zoomSpeed = 1f;
+    [SerializeField] private float deZoomSpeed = 2f;
+    [SerializeField] Image deathEffect;
+    [SerializeField] private Transform start;
+    [SerializeField] private float delayBeforeZoom;
+
+    private float normalSize;
+    private Coroutine zoomCoroutine;
+    private bool isDead = false;
+    private bool isZooming = false;
+    public bool isWin = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        normalSize = cam.orthographicSize;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(isWin)
+        {
+            StopZoom();
+            return;
+        }
+
         bool isInLight = false;
+        lights.RemoveAll(x => x == null);
         foreach (var light in lights)
         {
             isInLight |= light.isPlayerInLight;
         }
 
-       /* if (isInLight)
-            cam.orthographicSize = Mathf.Lerp();
-        else*/
-    }
+        if (isInLight)
+            StopZoom();
+        else
+            StartZoomWithDelay();
 
-    public IEnumerator ChangeScene()
-    {
-        // Valeur de départ de la taille de la caméra (orthographique)
-        float startOrthographicSize = cam.orthographicSize;
-
-        // Durée du fade
-        float fadeDuration = timeBeforeDeath;
-
-        // Le temps écoulé pour le zoom et le fade
-        float elapsedTime = 0f;
-
-        // Zoom et fade progressifs
-        while (elapsedTime < fadeDuration)
+        if (isZooming)
         {
-            // Calcul du pourcentage du temps écoulé pour le fade
-            float progress = elapsedTime / fadeDuration;
+            
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, zoomSize, Time.deltaTime * zoomSpeed);
 
-            // Applique un zoom progressif sur la taille orthographique
-            cam.orthographicSize = Mathf.Lerp(startOrthographicSize, targetOrthographicSize, progress);
+            var colorTmp = deathEffect.color;
+            colorTmp.a = Mathf.Lerp(colorTmp.a, 1, Time.deltaTime * zoomSpeed);
+            deathEffect.color = colorTmp;
 
-            // On attend la prochaine frame
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            if (cam.orthographicSize <= zoomSize + 0.1f) isDead = true;
+        }
+        else
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, normalSize, Time.deltaTime * deZoomSpeed);
+
+            var colorTmp = deathEffect.color;
+            colorTmp.a = Mathf.Lerp(colorTmp.a, 0, Time.deltaTime * deZoomSpeed);
+            deathEffect.color = colorTmp;
+
+            isDead = false;
         }
 
-        // Une fois la durée du fade et du zoom terminée, assure-toi que la taille finale est appliquée
-        cam.orthographicSize = targetOrthographicSize;
+        if (isDead)
+        {
+            transform.position = start.position;
+        }
+    }
 
-        // Charger la scène suivante
-        SceneManager.LoadScene(nextSceneName);
+    public void StartZoomWithDelay()
+    {
+        if (zoomCoroutine == null) // Évite de lancer plusieurs fois la coroutine
+        {
+            zoomCoroutine = StartCoroutine(ZoomAfterDelay());
+        }
+    }
+
+    public void StopZoom()
+    {
+        isZooming = false;
+        if (zoomCoroutine != null)
+        {
+            StopCoroutine(zoomCoroutine);
+            zoomCoroutine = null;
+        }
+    }
+
+    private IEnumerator ZoomAfterDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeZoom);
+        isZooming = true;
     }
 }

@@ -48,11 +48,14 @@ public class PlayerAimAndShoot : MonoBehaviour
         {
             flareInst = Instantiate(flare, flareSpawnPoint.position, rotationMouseGO.transform.rotation);
             Light2D light = flareInst.GetComponentInChildren<Light2D>();
-            Debug.Log(light);
             for (int i = 0; i < plateforms.Length; i++)
             {
                 plateforms[i].lightSource.Add(light);
             }
+            Debug.Log(GetComponent<PlayerLife>() == null);
+            Debug.Log(GetComponent<PlayerLife>().lights == null);
+            Debug.Log(light.gameObject.GetComponent<LightBehaviour>() == null);
+            GetComponent<PlayerLife>().lights.Add(light.gameObject.GetComponent<LightBehaviour>());
         }
     }
 }
