@@ -185,7 +185,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lampefixeplafond7_0: 3575591552073338762
+      Lampefixeplafond7_1: 5066437975387157830
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

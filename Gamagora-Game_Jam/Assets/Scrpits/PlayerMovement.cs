@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -41,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
 
     //Variable Coyote time
     private float _coyoteTimer;
+
+    [Header("VFX")]
+    public ParticleSystem dustRun;
+    public ParticleSystem dustJump;
 
     private void Awake()
     {
@@ -90,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput != Vector2.zero)
         {
             TurnCheck(moveInput);
-
+            CreateDust();
             Vector2 targetVelocity = Vector2.zero;
             if (InputManager.runIsHeld)
             {
@@ -205,6 +210,7 @@ public class PlayerMovement : MonoBehaviour
         //LANDED
         if((_isJumping || _isFalling) && _isGrounded && verticalVelocity <= 0f)
         {
+            dustJump.Play();
             _isJumping = false;
             _isFalling = false;
             _isFastFalling = false;
@@ -494,5 +500,11 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.DrawLine(previousPosition, drawPoint);
             previousPosition = drawPoint;
         }
+    }
+
+
+    private void CreateDust()
+    {
+        dustRun.Play();
     }
 }
